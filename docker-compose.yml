@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  controller:
+    image: wisefi-controller
+    build:
+      context: ./web
+    environment:
+      PORT: 8000
+      DATABASE_URL: sqlite://web/data/db.sqlite
+      DEBUG: "true"
+      SECRET_KEY: "fi4rx*k=y=sq+2)+jy)w&)somlx+^kih^uu*3osf!^$h!41q9u"
+    volumes:
+      - wisefi-data:/web/data
+      - wisefi-media:/web/wisefi/media
+    network_mode: host
+  captiveportal:
+    image: wisefi-captive-portal
+    build:
+      context: ./captiveportal
+    environment:
+      PORT: 8001
+      DATABASE_URL: sqlite://web/data/db.sqlite
+      DEBUG: "true"
+    volumes:
+      - wisefi-data:/web/data
+      - wisefi-media:/web/wisefi/media
+    network_mode: host
+    depends_on:
+      - controller
+
+volumes:
+  wisefi-data:
+  wisefi-media:

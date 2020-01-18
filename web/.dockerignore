@@ -1,0 +1,14 @@
+controller/
+scripts/
+wisefi/db.sqlite*
+.env
+.gitignore
+.pydevproject
+initWisefi.bat
+Makefile
+README.md
+setup
+start
+temp_data.json
+text.txt
+*.log
